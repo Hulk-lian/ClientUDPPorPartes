@@ -24,7 +24,8 @@ public class ServidorUDP {
 				String IPCli=datorecibido.getAddress().getHostAddress();
 				elDato=DatoUDP.fromByteArray(datorecibido.getData());
 				System.out.println("Recibiendo paquete de "+IPCli);
-				//si esta dentro del diccionario una part e
+				System.out.println(elDato.getId()+ " de " + elDato.getNTotalPartes() + ": \"" + elDato.getMensaje()+ "\"");
+				//si esta dentro del diccionario una parte
 				if(dic.containsKey(IPCli)){
 					contenedorAux=(ContenedorMens)dic.get(IPCli);
 					contenedorAux.nparte++;//aumentar el numero de parted de ese objeto
