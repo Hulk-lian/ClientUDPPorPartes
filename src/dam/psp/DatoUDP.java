@@ -1,6 +1,8 @@
 package dam.psp;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
@@ -10,6 +12,15 @@ public class DatoUDP implements Serializable{
 	private Integer nTotalPartes ;
 	private String mensaje;
 	
+	public Integer getId(){
+		return id;
+	}
+	public String getMensaje(){
+		return mensaje;
+	}
+	public Integer getNTotalPartes(){
+		return nTotalPartes;
+	}
 	public DatoUDP(Integer id,Integer nTotalPar, String cadena) {
 		this.id=id;
 		this.nTotalPartes=nTotalPar;
@@ -28,5 +39,19 @@ public class DatoUDP implements Serializable{
 			return null;
 		}
 	}
+	
+	public static DatoUDP fromByteArray(byte[] objSer){
+		try{
+			ByteArrayInputStream byteArray = new ByteArrayInputStream(objSer);
+			ObjectInputStream objImpInputStream= new ObjectInputStream(byteArray);
+			DatoUDP temp=(DatoUDP)objImpInputStream.readObject();
+			objImpInputStream.close();
+			return temp;
+		}catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 
 }
