@@ -18,15 +18,15 @@ public class Cliente {
 			this.pedirMensaje();
 			socket= new DatagramSocket(Constantes.PUERTO_CLI,
 					InetAddress.getByName(Constantes.IP_CLIENTE));
-			System.out.println("La longitud del menaje: "+mensEnviar.length());
+			System.out.println("La longitud del menaje: "+mensEnviar.length());//debug
 			int nEnvios=this.mensEnviar.length()/Constantes.TAM_PARTE_MAX;
 			int restantes=this.mensEnviar.length()%Constantes.TAM_PARTE_MAX;
 			
-			//en caso de que queden algunos caracteres se envia un paquete más con los restantes
+			//en caso de que queden algunos caracteres se envia un paquete mï¿½s con los restantes
 			if(restantes>0){
 				nEnvios++;
 			}
-			System.out.println("Mensaje dividido en "+nEnvios);
+			System.out.println("Mensaje dividido en "+nEnvios);//debug
 			int cont=0;
 			while(cont<nEnvios){
 				String fragmentoMensaje;
@@ -39,7 +39,7 @@ public class Cliente {
 				byte[] datoSerializado= elDatoAEnviar.toByteArray();
 				paquete= new DatagramPacket(datoSerializado, datoSerializado.length,InetAddress.getByName(Constantes.IP_SERV),Constantes.PUERTO_SERV);
 				
-				System.out.println("Dato enviado "+cont+ " parte "+fragmentoMensaje);
+				System.out.println("Dato enviado "+cont+ " parte "+fragmentoMensaje);//debug
 				socket.send(paquete);
 				Thread.sleep(200);
 				cont++;
